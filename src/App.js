@@ -4,11 +4,13 @@ import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Homepage from './Homepage.js';
 import {
+  Card,
+  CardBody,
+  CardTitle,
+  CardText,
   Navbar,
   NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink, } from 'reactstrap';
+ } from 'reactstrap';
 class App extends Component {
   render() {
     return (
@@ -37,7 +39,35 @@ class App extends Component {
           <DropTarget targetKey="foo" onHit={(e) => { console.log(e); alert("hello im dumb")}}>
               <p>I'm a valid drop target for the object above since we both have the same targetKey!</p>
           </DropTarget>
+
+
           </header>
+          <body>
+          <Card className="flow">
+            <CardBody>
+              <CardTitle>
+                Drag Me!
+              </CardTitle>
+              <CardText>something</CardText>
+            </CardBody>
+          </Card>
+          <Card className="flow">
+            <CardBody>
+              <CardTitle>
+                Drag Me!
+              </CardTitle>
+              <CardText>something</CardText>
+            </CardBody>
+          </Card>
+          <Card className="flow">
+            <CardBody>
+              <CardTitle>
+                Drag Me!
+              </CardTitle>
+              <CardText>something</CardText>
+            </CardBody>
+          </Card>
+          </body>
 
       </div>
     );
