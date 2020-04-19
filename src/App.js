@@ -14,7 +14,7 @@ import {
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="home">
         <BrowserRouter>
           <div>
               <Switch>
@@ -28,8 +28,7 @@ class App extends Component {
               </Navbar>
             </div>
         </BrowserRouter>
-        <header className="App-header">
-
+        <body className="homebody">
 
 
           <DragDropContainer targetKey="foo">
@@ -41,8 +40,6 @@ class App extends Component {
           </DropTarget>
 
 
-          </header>
-          <body>
           <Card className="flow">
             <CardBody>
               <CardTitle>
