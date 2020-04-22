@@ -11,6 +11,7 @@ import {
   Navbar,
   NavbarBrand,
  } from 'reactstrap';
+ import Nav from './Nav.js';
 class App extends Component {
   render() {
     return (

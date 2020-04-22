@@ -3,6 +3,7 @@ import './App.css';
 import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 import axios from 'axios';
 import { Form, Field } from 'react-final-form';
+import Nav from './Nav.js';
 
 class RewritePage extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class RewritePage extends React.Component {
   return (
     <div className="App">
       <header className="App-header">
-
+        <Nav />
       </header>
       <div>
       <Form onSubmit={this.onSubmit} render={({ handleSubmit, values }) => (
