@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+//import App from './App';
+import RewritePage from './RewritePage';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RewritePage />
   </React.StrictMode>,
   document.getElementById('root')
 );
