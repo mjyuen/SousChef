@@ -10,58 +10,74 @@ class RewritePage extends React.Component {
     super(props);
 
     this.state = {
-      ingredient: {}
+      ingredient: {},
+      rewritten: '',
     }
   }
 
-  componentDidMount() {
-    axios({
-      method: 'get',
-      url: 'http://localhost:5000/gettricky',
-      headers: {},
-    })
-    .then(resp => {
-      this.setState({ingredient: resp.data});
-      console.log(resp.data);
-    })
+  async componentDidMount() {
+    await this.getNextOriginalIngredient();
   }
   
-  onSubmit = values => {
+  onSubmit = async values => {
     console.log(values)
     axios({
       method: 'post',
       url: 'http://localhost:5000/fixed',
       data: {
         "original": this.state.ingredient.text,
-        "rewritten": values.rewrite
+        "rewritten": this.state.rewritten,
       }
     })
     .then(resp => {
-      window.location.reload()
+      return this.getNextOriginalIngredient();
     })
   }
+
   render() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Nav />
-      </header>
-      <div>
-      <Form onSubmit={this.onSubmit} render={({ handleSubmit, values }) => (
-        <form onSubmit={handleSubmit}>
-        <label>{this.state.ingredient.text}</label>
-        <Field
-          name="rewrite"
-          component="input"
-          type="text"
-        />
-        <button type="submit">Submit</button>
-        </form>
-      )}/>
+    return (
+      <div className="App">
+        <header className="App-header">
+        </header>
+        <div>
+        <Form onSubmit={this.onSubmit} render={({ handleSubmit, values }) => (
+          <form onSubmit={handleSubmit}>
+          <label>{this.state.ingredient.text}</label>
+          <Field
+            name="rewrite"
+          >
+            {props => (
+              <div>
+                <input {...props.input}
+                type="text"
+                onChange={this.onChangeRewrite}
+                value={this.state.rewritten} />
+              </div>
+            )}
+          </Field>
+          <button type="submit">Submit</button>
+          </form>
+        )}/>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+
+  onChangeRewrite = (event) => {
+    this.setState({
+      rewritten: event.target.value
+    });
+  }
+
+  async getNextOriginalIngredient() {
+    const resp = await axios({
+      method: 'get',
+      url: 'http://localhost:5000/gettricky',
+      headers: {},
+    });
+    this.setState({ingredient: resp.data, rewritten:'' });
+    console.log(resp.data);
+  }
 }
 
 export default RewritePage;

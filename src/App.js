@@ -3,6 +3,8 @@ import './App.css';
 import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Homepage from './Homepage.js';
+import RewritePage from './RewritePage.js';
+import ParsePage from './ParsePage';
 import {
   Card,
   CardBody,
@@ -11,7 +13,6 @@ import {
   Navbar,
   NavbarBrand,
  } from 'reactstrap';
- import Nav from './Nav.js';
 class App extends Component {
   render() {
     return (
@@ -29,6 +30,12 @@ class App extends Component {
               </Navbar>
             </div>
         </BrowserRouter>
+        <div>
+          <RewritePage />
+        </div>
+        <div>
+          <ParsePage />
+        </div>
         <body className="homebody">
 
 
