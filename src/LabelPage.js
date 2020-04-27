@@ -1,62 +1,142 @@
 import React from 'react';
 import './App.css';
-import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 import axios from 'axios';
-import Nav from './Nav.js';
+import { Form, Field } from 'react-final-form';
 
 class LabelPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      ingredient: {}
+      ingredient: {},
+      quantity: '',
+      unit: '',
+      name: '',
+      comment: '',
     }
   }
 
-  componentDidMount() {
-    axios({
-      method: 'get',
-      url: 'http://localhost:5000/gettricky',
-      headers: {},
-    })
-    .then(resp => {
-      this.setState({ingredient: resp.data});
-      console.log(resp.data);
-    })
+  async componentDidMount() {
+    await this.getNextOriginalIngredient();
   }
   
-  onSubmit = values => {
+  onSubmit = async values => {
     console.log(values)
     axios({
       method: 'post',
-      url: 'http://localhost:5000/fixed',
+      url: 'http://localhost:5000/addlabel',
       data: {
-        "original": this.state.ingredient.text,
-        "rewritten": values.rewrite
+        "text": this.state.ingredient.text,
+        "quantity": this.state.quantity,
+        "unit": this.state.unit,
+        "name": this.state.name,
+        "comment": this.state.comment
       }
     })
     .then(resp => {
-      window.location.reload()
+      return this.getNextOriginalIngredient();
     })
   }
-  render() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Nav />
-      </header>
-      <div>
-          <DragDropContainer targetKey="foo">
-            <div>dog</div>
-          </DragDropContainer>
 
-          <DropTarget targetKey="foo" onHit={(e) => { console.log(e); alert("hello im dumb")}}>
-              <p>I'm a valid drop target for the object above since we both have the same targetKey!</p>
-          </DropTarget>
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+        </header>
+        <div>
+        <Form onSubmit={this.onSubmit} render={({ handleSubmit, values }) => (
+          <form onSubmit={handleSubmit}>
+          <p>{this.state.ingredient.text}</p>
+          <label>Quantity:</label>
+          <Field
+            name="quantity"
+          >
+            {props => (
+              <div>
+                <input {...props.input}
+                type="text"
+                onChange={this.onChangeQuantity}
+                value={this.state.quantity} />
+              </div>
+            )}
+          </Field>
+          <label>Unit:</label>
+          <Field
+            name="unit"
+          >
+            {props => (
+              <div>
+                <input {...props.input}
+                type="text"
+                onChange={this.onChangeUnit}
+                value={this.state.unit} />
+              </div>
+            )}
+          </Field>
+          <label>Name:</label>
+          <Field
+            name="name"
+          >
+            {props => (
+              <div>
+                <input {...props.input}
+                type="text"
+                onChange={this.onChangeName}
+                value={this.state.name} />
+              </div>
+            )}
+          </Field>
+          <label>Comment:</label>
+          <Field
+            name="comment"
+          >
+            {props => (
+              <div>
+                <input {...props.input}
+                type="text"
+                onChange={this.onChangeComment}
+                value={this.state.comment} />
+              </div>
+            )}
+          </Field>
+          <button type="submit">Submit</button>
+          </form>
+        )}/>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+
+  onChangeQuantity = (event) => {
+    this.setState({
+      quantity: event.target.value
+    });
+  }
+  onChangeUnit = (event) => {
+    this.setState({
+      unit: event.target.value
+    });
+  }
+  onChangeName = (event) => {
+    this.setState({
+      name: event.target.value
+    });
+  }
+  onChangeComment = (event) => {
+    this.setState({
+      comment: event.target.value
+    });
+  }
+
+  async getNextOriginalIngredient() {
+    const resp = await axios({
+      method: 'get',
+      url: 'http://localhost:5000/gettext',
+      headers: {},
+    });
+    this.setState({ingredient: resp.data, quantity: '', unit: '', name: '', comment: '' });
+    console.log(resp.data);
+  }
 }
 
 export default LabelPage;

@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
-import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 import axios from 'axios';
-import { Form, Field } from 'react-final-form';
-import Nav from './Nav.js';
 
 class ParsePage extends React.Component {
   constructor(props) {
@@ -32,7 +29,7 @@ class ParsePage extends React.Component {
   }
 
   handleTextareaInput = (e) => {
-      this.setState({ingredientsInputText: e.target.value});
+      this.setState({ingredientsInputText: e.target.value.trim()});
   }
 
   handleSubmit = (e) => {
