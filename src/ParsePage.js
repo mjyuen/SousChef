@@ -14,15 +14,19 @@ class ParsePage extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div>
-            <form onSubmit={this.handleSubmit}>
-                <textarea onChange={this.handleTextareaInput}></textarea>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-        <div>
-            <pre>{this.state.resultText}</pre>
+      <div className="Pane">
+        <h3 className="Title">Parse an Ingredient</h3>
+        <p className="Description">Enter an ingredient or list of ingredients into the box below. Then, hit the button to see how the parser performs! Not sure what to write? Try typing "1 tbsp lemon juice".</p>
+        <div className="ColumnContainer">
+            <div className="Column">
+                <form onSubmit={this.handleSubmit} style={{flexDirection: 'column', display: 'flex'}}>
+                    <textarea onChange={this.handleTextareaInput}></textarea>
+                    <button type="submit">Parse This</button>
+                </form>
+            </div>
+            <div className="Column" style={{background: 'grey', borderRadius: '8px', padding: '10px'}}>
+                <pre style={{color: 'white'}}>{this.state.resultText}</pre>
+            </div>
         </div>
       </div>
     );

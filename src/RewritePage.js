@@ -34,13 +34,16 @@ class RewritePage extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-        </header>
-        <div>
+      <div className="Pane">
+        <h3 className="Title">Fix an Ingredient</h3>
+        <p className="Description">Some ingredient texts don't play well with our parser. There's an example below; try rewriting it in a new way that our parser might understand.</p>
+        <div className="ColumnContainer">
+        <div className="Column" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <label>{this.state.ingredient.text}</label>
+        </div>
+        <div className="Column">
         <Form onSubmit={this.onSubmit} render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
-          <label>{this.state.ingredient.text}</label>
           <Field
             name="rewrite"
           >
@@ -56,6 +59,7 @@ class RewritePage extends React.Component {
           <button type="submit">Submit</button>
           </form>
         )}/>
+        </div>
         </div>
       </div>
     );

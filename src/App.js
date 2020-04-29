@@ -22,21 +22,19 @@ class App extends Component {
           </div> 
           <div>
               <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">home</NavbarBrand>
-                <NavbarBrand href="/about">about</NavbarBrand>
+                <NavbarBrand href="/">Sous Chef</NavbarBrand>
               </Navbar>
             </div>
         </BrowserRouter>
-        <div>
-          <RewritePage />
-        </div>
         <div>
           <ParsePage />
         </div>
         <div>
           <LabelPage />
         </div>
-
+        <div>
+          <RewritePage />
+        </div>
       </div>
     );
   }

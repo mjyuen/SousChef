@@ -40,13 +40,16 @@ class LabelPage extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-        </header>
-        <div>
+      <div className="Pane">
+        <h3 className="Title">Label an Ingredient</h3>
+        <p className="Description">This time, try labeling the text provided into categories of quantity, unit, name, and comment. No need to fill every category!</p>
+        <div className="ColumnContainer">
+        <div className="Column" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <p>{this.state.ingredient.text}</p>
+        </div>
+        <div className="Column">
         <Form onSubmit={this.onSubmit} render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
-          <p>{this.state.ingredient.text}</p>
           <label>Quantity:</label>
           <Field
             name="quantity"
@@ -102,6 +105,7 @@ class LabelPage extends React.Component {
           <button type="submit">Submit</button>
           </form>
         )}/>
+        </div>
         </div>
       </div>
     );
