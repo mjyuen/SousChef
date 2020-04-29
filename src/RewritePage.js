@@ -10,6 +10,8 @@ class RewritePage extends React.Component {
     this.state = {
       ingredient: {},
       rewritten: '',
+      attempts: 0,
+      resultText: '',
     }
   }
 
@@ -25,6 +27,7 @@ class RewritePage extends React.Component {
       data: {
         "original": this.state.ingredient.text,
         "rewritten": this.state.rewritten,
+        "attempts": this.state.attempts
       }
     })
     .then(resp => {
@@ -59,10 +62,35 @@ class RewritePage extends React.Component {
           <button type="submit">Submit</button>
           </form>
         )}/>
+          <button type="parse" onClick={this.onParseClick}>Parse</button>
+
         </div>
+
+        <div className="Column" style={{background: 'grey', borderRadius: '8px', padding: '10px'}}>
+          <pre style={{color: 'white'}}>{this.state.resultText}</pre>
+        </div>
+
+
         </div>
       </div>
     );
+  }
+  
+  onParseClick = (event) => {
+    this.setState({
+      attempts: this.state.attempts + 1
+    });
+    console.log(this.state.attempts)
+    const ingredient = this.state.rewritten.split(/\n/);
+    axios({
+      method: 'post',
+      url: 'http://localhost:5000/parsetext',
+      data: {text: ingredient}
+    })
+    .then(resp => {
+      console.log(resp.data);
+      this.setState({resultText: JSON.stringify(resp.data, null, 2)})
+    })
   }
 
   onChangeRewrite = (event) => {
@@ -77,7 +105,7 @@ class RewritePage extends React.Component {
       url: 'http://localhost:5000/gettricky',
       headers: {},
     });
-    this.setState({ingredient: resp.data, rewritten:'' });
+    this.setState({ingredient: resp.data, rewritten:'', attempts: 0, resultText: '' });
     console.log(resp.data);
   }
 }
