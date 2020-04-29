@@ -34,7 +34,7 @@ class RewritePage extends React.Component {
 
   render() {
     return (
-      <div className="Pane">
+      <div className="Pane" style={{backgroundColor: '#b3d9ff'}}>
         <h3 className="Title">Fix an Ingredient</h3>
         <p className="Description">Some ingredient texts don't play well with our parser. There's an example below; try rewriting it in a new way that our parser might understand.</p>
         <div className="ColumnContainer">

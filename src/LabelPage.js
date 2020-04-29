@@ -40,7 +40,7 @@ class LabelPage extends React.Component {
 
   render() {
     return (
-      <div className="Pane">
+      <div className="Pane" style={{backgroundColor: '#cceeff'}}>
         <h3 className="Title">Label an Ingredient</h3>
         <p className="Description">This time, try labeling the text provided into categories of quantity, unit, name, and comment. No need to fill every category!</p>
         <div className="ColumnContainer">
