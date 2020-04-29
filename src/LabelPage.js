@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import { Form, Field } from 'react-final-form';
+import { Button } from 'reactstrap';
+
 
 class LabelPage extends React.Component {
   constructor(props) {
@@ -41,11 +43,11 @@ class LabelPage extends React.Component {
   render() {
     return (
       <div className="Pane" style={{backgroundColor: '#cceeff'}}>
-        <h3 className="Title">Label an Ingredient</h3>
+        <h3 className="Title" style={{marginBottom: "20px"}}>Label an Ingredient</h3>
         <p className="Description">This time, try labeling the text provided into categories of quantity, unit, name, and comment. No need to fill every category!</p>
         <div className="ColumnContainer">
         <div className="Column" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <p>{this.state.ingredient.text}</p>
+          <p style={{fontWeight:"500"}}>{this.state.ingredient.text}</p>
         </div>
         <div className="Column">
         <Form onSubmit={this.onSubmit} render={({ handleSubmit, values }) => (
@@ -102,7 +104,7 @@ class LabelPage extends React.Component {
               </div>
             )}
           </Field>
-          <button type="submit">Submit</button>
+          <Button color="primary" type="submit" style={{marginTop: "10px"}}>Submit</Button>
           </form>
         )}/>
         </div>

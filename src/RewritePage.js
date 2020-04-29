@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import { Form, Field } from 'react-final-form';
+import { Button } from 'reactstrap';
+
 
 class RewritePage extends React.Component {
   constructor(props) {
@@ -38,11 +40,11 @@ class RewritePage extends React.Component {
   render() {
     return (
       <div className="Pane" style={{backgroundColor: '#b3d9ff'}}>
-        <h3 className="Title">Fix an Ingredient</h3>
+        <h3 className="Title" style={{marginBottom: "30px"}}>Fix an Ingredient</h3>
         <p className="Description">Some ingredient texts don't play well with our parser. There's an example below; try rewriting it in a new way that our parser might understand.</p>
         <div className="ColumnContainer">
         <div className="Column" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <label>{this.state.ingredient.text}</label>
+          <label style={{fontWeight:"500"}}>{this.state.ingredient.text}</label>
         </div>
         <div className="Column">
         <Form onSubmit={this.onSubmit} render={({ handleSubmit, values }) => (
@@ -59,14 +61,14 @@ class RewritePage extends React.Component {
               </div>
             )}
           </Field>
-          <button type="submit">Submit</button>
+          <Button color="success" type="submit" style={{marginTop: "10px"}}>Submit</Button>
           </form>
         )}/>
-          <button type="parse" onClick={this.onParseClick}>Parse</button>
+          <Button color="primary" type="parse" onClick={this.onParseClick} style={{marginTop: "10px"}}>Parse</Button>
 
         </div>
 
-        <div className="Column" style={{background: 'grey', borderRadius: '8px', padding: '10px'}}>
+        <div className="Column" style={{background: '#6c757d', borderRadius: '8px', padding: '10px'}}>
           <pre style={{color: 'white'}}>{this.state.resultText}</pre>
         </div>
 
