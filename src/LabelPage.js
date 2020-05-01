@@ -26,7 +26,7 @@ class LabelPage extends React.Component {
     console.log(values)
     axios({
       method: 'post',
-      url: 'http://localhost:5000/addlabel',
+      url: 'https://souschef-backend.herokuapp.com/addlabel',
       data: {
         "text": this.state.ingredient.text,
         "quantity": this.state.quantity,
@@ -137,7 +137,7 @@ class LabelPage extends React.Component {
   async getNextOriginalIngredient() {
     const resp = await axios({
       method: 'get',
-      url: 'http://localhost:5000/gettext',
+      url: 'https://souschef-backend.herokuapp.com/gettext',
       headers: {},
     });
     this.setState({ingredient: resp.data, quantity: '', unit: '', name: '', comment: '' });

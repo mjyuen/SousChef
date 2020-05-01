@@ -25,7 +25,7 @@ class RewritePage extends React.Component {
     console.log(values)
     axios({
       method: 'post',
-      url: 'http://localhost:5000/fixed',
+      url: 'https://souschef-backend.herokuapp.com/fixed',
       data: {
         "original": this.state.ingredient.text,
         "rewritten": this.state.rewritten,
@@ -86,7 +86,7 @@ class RewritePage extends React.Component {
     const ingredient = this.state.rewritten.split(/\n/);
     axios({
       method: 'post',
-      url: 'http://localhost:5000/parsetext',
+      url: 'https://souschef-backend.herokuapp.com/parsetext',
       data: {text: ingredient}
     })
     .then(resp => {
@@ -104,7 +104,7 @@ class RewritePage extends React.Component {
   async getNextOriginalIngredient() {
     const resp = await axios({
       method: 'get',
-      url: 'http://localhost:5000/gettricky',
+      url: 'https://souschef-backend.herokuapp.com/gettricky',
       headers: {},
     });
     this.setState({ingredient: resp.data, rewritten:'', attempts: 0, resultText: '' });

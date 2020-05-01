@@ -43,7 +43,7 @@ class ParsePage extends React.Component {
       console.log(ingredients);
       axios({
         method: 'post',
-        url: 'http://localhost:5000/parsetext',
+        url: 'https://souschef-backend.herokuapp.com/parsetext',
         data: {text: ingredients}
       })
       .then(resp => {
